@@ -1,0 +1,17 @@
+{
+    "explainer": {
+        "dataset": "mutag",
+        "model": "GNN",
+        "explainer": "PROXY",
+        "lr" : 0.005,
+        "epochs" : 100,
+        "sample_bias" : 0.0,
+        "reg_size" : 0.005,
+        "reg_ent" : 1.0,
+        "temps" : [5.0, 5.0],
+        "seeds" : [0],
+        "eval_enabled" : true,
+        "thres_snip" : 2,
+        "thres_min" : -1
+    }
+}
