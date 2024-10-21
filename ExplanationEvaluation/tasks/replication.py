@@ -7,6 +7,7 @@ from ExplanationEvaluation.datasets.ground_truth_loaders import load_dataset_gro
 from ExplanationEvaluation.evaluation.AUCEvaluation import AUCEvaluation
 from ExplanationEvaluation.evaluation.EfficiencyEvaluation import EfficiencyEvluation
 from ExplanationEvaluation.explainers.ProxyExplainer import PROXYExplainer
+from ExplanationEvaluation.explainers.ProxyExplainer_ba2 import PROXYExplainer_ba2
 from ExplanationEvaluation.models.model_selector import model_selector
 
 
@@ -20,10 +21,13 @@ def to_torch_graph(graphs):
     return [torch.tensor(g) for g in graphs]
 
 
-def select_explainer(explainer,  model, graphs, features, epochs, lr, reg_coefs, temp=None, sample_bias=None,device='cpu'):
+def select_explainer(dataset_name, explainer, model, graphs, features, epochs, lr, reg_coefs, temp=None, sample_bias=None,device='cpu'):
 
     if explainer == "PROXY":
-        return PROXYExplainer(model, graphs, features, device=device, epochs=epochs, lr=lr, reg_coefs=reg_coefs, temp=temp, sample_bias=sample_bias)
+        if dataset_name == 'ba2motifs':
+            return PROXYExplainer_ba2(model, graphs, features, device=device, epochs=epochs, lr=lr, reg_coefs=reg_coefs, temp=temp, sample_bias=sample_bias) 
+        else:
+            return PROXYExplainer(model, graphs, features, device=device, epochs=epochs, lr=lr, reg_coefs=reg_coefs, temp=temp, sample_bias=sample_bias) 
     
     else:
         raise NotImplementedError("Unknown explainer type")
@@ -85,7 +89,8 @@ def replication(config, extension=False, device='cpu'):
     if config.eval_enabled:
         model.eval()
 
-    explainer = select_explainer(config.explainer,
+    explainer = select_explainer(config.dataset,
+                                config.explainer,
                                 model=model,
                                 graphs=graphs,
                                 features=features,
