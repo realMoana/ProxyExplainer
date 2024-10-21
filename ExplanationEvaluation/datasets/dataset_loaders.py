@@ -28,8 +28,12 @@ def load_graph_dataset(dataset_name, shuffle=True):
         with open(dataset_path, 'rb') as fin:
             adjs, features, labels = pickle.load(fin)
 
-    if dataset_name.lower() != "mutag":
-        raise NotImplementedError("Unknown dataset")
+    if dataset_name.lower() != "mutag": 
+        # raise NotImplementedError("Unknown dataset")
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        path = dir_path + '/pkls/' + "BA-2motif" + '.pkl'
+        with open(path, 'rb') as fin:
+            adjs, features, labels = pickle.load(fin)
 
     n_graphs = adjs.shape[0]
     indices = np.arange(n_graphs)
