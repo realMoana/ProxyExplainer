@@ -24,7 +24,7 @@ def to_torch_graph(graphs):
 def select_explainer(dataset_name, explainer, model, graphs, features, epochs, lr, reg_coefs, temp=None, sample_bias=None,device='cpu'):
 
     if explainer == "PROXY":
-        if dataset_name == 'ba2motifs':
+        if dataset_name == 'ba2':
             return PROXYExplainer_ba2(model, graphs, features, device=device, epochs=epochs, lr=lr, reg_coefs=reg_coefs, temp=temp, sample_bias=sample_bias) 
         else:
             return PROXYExplainer(model, graphs, features, device=device, epochs=epochs, lr=lr, reg_coefs=reg_coefs, temp=temp, sample_bias=sample_bias) 
