@@ -19,6 +19,8 @@ def string_to_model(paper, dataset):
     if paper == "GNN":
         if dataset == "mutag":
             return GNN_GraphGCN(14, 2)
+        elif dataset == "ba2":
+            return GNN_GraphGCN(10, 2)
         else:
             raise NotImplementedError(f"Model for dataset {dataset} is not implemented under paper {paper}.")
     else:

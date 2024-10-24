@@ -2,7 +2,7 @@
     "explainer": {
         "dataset": "ba2",
         "model": "GNN",
-        "explainer": "PROXY",
+        "explainer": "PROXY_ba2",
         "lr" : 0.001,
         "epochs" : 100,
         "sample_bias" : 0.0,
